@@ -19,7 +19,7 @@ events = [
 
 # TODO: Task 1 - Define the Problem
 def find_event(event_id):
-    return next((event for event in events if event.id == event_id), None)
+    return next((event for event in events if str(event.id) == str(event_id)), None)
 
 @app.route('/', methods=['GET'])
 def welcome():
@@ -49,11 +49,11 @@ def create_event():
     
     return jsonify(new_event.to_dict()), 201
 
-    pass
+
 
 # TODO: Task 1 - Define the Problem
 def find_event(event_id):
-    return next((event for event in events if event.id == event_id), None)
+    return next((event for event in events if str(event.id) == str(event_id)), None)
 
 # Update the title of an existing event ( PATCH /events/<int:id> )
 @app.route("/events/<int:event_id>", methods=["PATCH"])
@@ -74,11 +74,11 @@ def update_event(event_id):
     event.title = data['title']
     return jsonify(event.to_dict()), 200
 
-    pass
+
 
 # TODO: Task 1 - Define the Problem
 def find_event(event_id):
-    return next((event for event in events if event.id == event_id), None)
+    return next((event for event in events if str(event.id) == str(event_id)), None)
 
 # Remove an event from the list ( DELETE /events/<int:id> )
 @app.route("/events/<int:event_id>", methods=["DELETE"])
@@ -92,9 +92,9 @@ def delete_event(event_id):
 
     # TODO: Task 4 - Return and Handle Results
     events.remove(event)
-    return jsonify({"message": f"Event with ID {id} successfully deleted"}), 200
+    return '', 204
 
-    pass
+    
 
 if __name__ == "__main__":
     app.run(debug=True)
