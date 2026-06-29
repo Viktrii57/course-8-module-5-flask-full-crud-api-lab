@@ -50,20 +50,15 @@ def create_event():
     return jsonify(new_event.to_dict()), 201
 
 
-
-# TODO: Task 1 - Define the Problem
-def find_event(event_id):
-    return next((event for event in events if str(event.id) == str(event_id)), None)
-
 # Update the title of an existing event ( PATCH /events/<int:id> )
 @app.route("/events/<int:event_id>", methods=["PATCH"])
 def update_event(event_id):
     # TODO: Task 2 - Design and Develop the Code
-    event = find_event(id)
+    event = find_event(event_id)
 
     # TODO: Task 3 - Implement the Loop and Process Each Element
     if not event:
-        return jsonify({"error": "Not Found", "message": f"Event with ID {id} does not exist"}), 404
+        return jsonify({"error": "Not Found", "message": f"Event with ID {event_id} does not exist"}), 404
         
     data = request.get_json()
 
@@ -75,20 +70,15 @@ def update_event(event_id):
     return jsonify(event.to_dict()), 200
 
 
-
-# TODO: Task 1 - Define the Problem
-def find_event(event_id):
-    return next((event for event in events if str(event.id) == str(event_id)), None)
-
 # Remove an event from the list ( DELETE /events/<int:id> )
 @app.route("/events/<int:event_id>", methods=["DELETE"])
 def delete_event(event_id):
     # TODO: Task 2 - Design and Develop the Code
-    event = find_event(id)
+    event = find_event(event_id)
 
     # TODO: Task 3 - Implement the Loop and Process Each Element
     if not event:
-        return jsonify({"error": "Not Found", "message": f"Event with ID {id} does not exist"}), 404
+        return jsonify({"error": "Not Found", "message": f"Event with ID {event_id} does not exist"}), 404
 
     # TODO: Task 4 - Return and Handle Results
     events.remove(event)
